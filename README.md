@@ -20,12 +20,13 @@ CLI-утилита собирает статистику по комментар
 copy .env.example .env
 ```
 
-Приложение берёт учётные данные **только из `.env`**:
+Приложение берёт настройки **только из `.env`**:
 
 | Переменная | Описание |
 |---|---|
 | `EMAIL` | email аккаунта Atlassian |
 | `TOKEN` | API-токен Bitbucket |
+| `REPOSITORY_URL` | API URL репозитория, например `https://api.bitbucket.org/2.0/repositories/workspace/repo/` |
 | `CSV_PATH_TO_EXPORT` | путь к CSV-файлу отчёта |
 
 Файл `.env` не коммитится.

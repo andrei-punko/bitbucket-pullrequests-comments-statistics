@@ -4,7 +4,7 @@ cd /d "%~dp0"
 
 if not exist ".env" (
     echo File .env not found.
-    echo Copy .env.example to .env and fill in EMAIL, TOKEN and CSV_PATH_TO_EXPORT.
+    echo Copy .env.example to .env and fill in EMAIL, TOKEN, REPOSITORY_URL and CSV_PATH_TO_EXPORT.
     exit /b 1
 )
 
@@ -18,6 +18,10 @@ if "%EMAIL%"=="" (
 )
 if "%TOKEN%"=="" (
     echo TOKEN is not set in .env
+    exit /b 1
+)
+if "%REPOSITORY_URL%"=="" (
+    echo REPOSITORY_URL is not set in .env
     exit /b 1
 )
 if "%CSV_PATH_TO_EXPORT%"=="" (

@@ -12,9 +12,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Credentials and export path are loaded from .env:
+ * Credentials, repository and export path are loaded from .env:
  * EMAIL - Atlassian account email
  * TOKEN - Bitbucket API token
+ * REPOSITORY_URL - Bitbucket API repository URL
  * CSV_PATH_TO_EXPORT - path to export CSV file
  */
 public class Application {
@@ -57,8 +58,9 @@ public class Application {
             String value = unquote(trimmed.substring(separator + 1).trim());
             properties.put(key, value);
         }
-        if (isBlank(properties.get("EMAIL")) || isBlank(properties.get("TOKEN"))) {
-            throw new IllegalStateException(".env must contain EMAIL and TOKEN");
+        if (isBlank(properties.get("EMAIL")) || isBlank(properties.get("TOKEN"))
+                || isBlank(properties.get("REPOSITORY_URL"))) {
+            throw new IllegalStateException(".env must contain EMAIL, TOKEN and REPOSITORY_URL");
         }
         System.out.println("Loaded credentials from .env, EMAIL=" + properties.get("EMAIL"));
         return new MapPropertySource("dotenv", properties);

@@ -47,8 +47,6 @@ public class BitbucketService {
 
     private static final ZoneId ZONE = ZoneId.of("Europe/Minsk");
 
-    private static final String SERVICE_URL = "https://api.bitbucket.org/2.0/repositories/BITBUCKET_ACCOUNT/REPOSITORY_NAME/";
-
     private static final String PAGINATION = ",size,page,next";
 
     private static final String PULL_REQUESTS_Q = "&q=comment_count>0";
@@ -84,6 +82,9 @@ public class BitbucketService {
 
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
+    @Value("${REPOSITORY_URL}")
+    private String serviceUrl;
+
     @Value("${CSV_PATH_TO_EXPORT}")
     private String pathToExport;
 
@@ -93,9 +94,10 @@ public class BitbucketService {
 
     public void export() {
         Instant started = Instant.now();
+        log("Repository API: " + serviceUrl);
         log("Downloading pull request list...");
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(SERVICE_URL + PULL_REQUESTS);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(serviceUrl + PULL_REQUESTS);
         String uriString = builder
                 .build(false)
                 .toString();
@@ -251,7 +253,7 @@ public class BitbucketService {
     }
 
     private List<Comment> getCommentsForPullRequest(Long pullRequestId) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(SERVICE_URL + COMMENTS.formatted(pullRequestId));
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(serviceUrl + COMMENTS.formatted(pullRequestId));
         String uriString = builder
                 .build(false)
                 .toString();
@@ -268,7 +270,7 @@ public class BitbucketService {
     }
 
     private List<Activity> getActivityListForPullRequest(Long pullRequestId) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(SERVICE_URL + ACTIVITY.formatted(pullRequestId));
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(serviceUrl + ACTIVITY.formatted(pullRequestId));
         String uriString = builder
                 .build(false)
                 .toString();
@@ -285,7 +287,7 @@ public class BitbucketService {
     }
 
     private Comment getSingleComment(Long pullRequestId, Long commentId) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(SERVICE_URL + SINGLE_COMMENT.formatted(pullRequestId, commentId));
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(serviceUrl + SINGLE_COMMENT.formatted(pullRequestId, commentId));
         String uriString = builder
                 .build(false)
                 .toString();
