@@ -1,6 +1,7 @@
 # Bitbucket pull requests comments statistics
 
 [![Java CI with Maven](https://github.com/andrei-punko/bitbucket-pullrequests-comments-statistics/actions/workflows/maven.yml/badge.svg)](https://github.com/andrei-punko/bitbucket-pullrequests-comments-statistics/actions/workflows/maven.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 CLI-утилита собирает статистику по комментариям в pull requests Bitbucket репозитория и сохраняет её в CSV.
 
@@ -8,9 +9,9 @@ CLI-утилита собирает статистику по комментар
 
 ## Требования
 
-- Java 21
-- Maven
-- учётная запись Bitbucket с доступом к репозиторию
+- JDK 21
+- Maven 3
+- Учётная запись Bitbucket с доступом к репозиторию
 
 ## Настройка
 
@@ -24,9 +25,9 @@ copy .env.example .env
 
 | Переменная | Описание |
 |---|---|
+| `REPOSITORY_URL` | API URL репозитория, например `https://api.bitbucket.org/2.0/repositories/workspace/repo/` |
 | `EMAIL` | email аккаунта Atlassian |
 | `TOKEN` | API-токен Bitbucket |
-| `REPOSITORY_URL` | API URL репозитория, например `https://api.bitbucket.org/2.0/repositories/workspace/repo/` |
 | `CSV_PATH_TO_EXPORT` | путь к CSV-файлу отчёта |
 
 Файл `.env` не коммитится.
