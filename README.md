@@ -1,5 +1,7 @@
 # Bitbucket pull requests comments statistics
 
+[![Java CI with Maven](https://github.com/andrei-punko/bitbucket-pullrequests-comments-statistics/actions/workflows/maven.yml/badge.svg)](https://github.com/andrei-punko/bitbucket-pullrequests-comments-statistics/actions/workflows/maven.yml)
+
 CLI-утилита собирает статистику по комментариям в pull requests Bitbucket репозитория и сохраняет её в CSV.
 
 Приложение **только читает** Bitbucket API (`GET`). Ничего в репозитории, PR и комментариях не меняется. На диск пишется только локальный CSV.
