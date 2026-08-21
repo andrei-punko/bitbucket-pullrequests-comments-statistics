@@ -1,6 +1,6 @@
-# Bitbucket pull requests comments statistics
+# Bitbucket pull requests statistics
 
-[![Java CI with Maven](https://github.com/andrei-punko/bitbucket-pullrequests-comments-statistics/actions/workflows/maven.yml/badge.svg)](https://github.com/andrei-punko/bitbucket-pullrequests-comments-statistics/actions/workflows/maven.yml)
+[![Java CI with Maven](https://github.com/andrei-punko/bitbucket-pullrequests-statistics/actions/workflows/maven.yml/badge.svg)](https://github.com/andrei-punko/bitbucket-pullrequests-statistics/actions/workflows/maven.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 CLI-утилита собирает статистику по комментариям в pull requests Bitbucket репозитория и сохраняет её в CSV.
