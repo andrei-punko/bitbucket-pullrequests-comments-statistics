@@ -20,8 +20,12 @@ public class ReportItem {
 
     private final int commitCount;
 
+    private final int commentsCount;
+
+    private final int chainsCount;
+
     public ReportItem(Long pullRequestId, String createdDate, String mergedDate, String pullRequestLink, Map<Tag, Integer> prStatistic,
-                      int daysCountWithoutAnyActivity, int commitCount) {
+                      int daysCountWithoutAnyActivity, int commitCount, int commentsCount, int chainsCount) {
         this.pullRequestId = pullRequestId;
         this.createdDate = createdDate;
         this.mergedDate = mergedDate;
@@ -29,6 +33,8 @@ public class ReportItem {
         this.prStatistic = prStatistic;
         this.daysCountWithoutAnyActivity = daysCountWithoutAnyActivity;
         this.commitCount = commitCount;
+        this.commentsCount = commentsCount;
+        this.chainsCount = chainsCount;
     }
 
     public Long getPullRequestId() {
@@ -57,5 +63,20 @@ public class ReportItem {
 
     public int getCommitCount() {
         return commitCount;
+    }
+
+    public int getCommentsCount() {
+        return commentsCount;
+    }
+
+    public int getChainsCount() {
+        return chainsCount;
+    }
+
+    public int getTotalTagsCount() {
+        return prStatistic.entrySet().stream()
+                .filter(entry -> !Tag.DEFAULT.equals(entry.getKey()))
+                .mapToInt(Map.Entry::getValue)
+                .sum();
     }
 }

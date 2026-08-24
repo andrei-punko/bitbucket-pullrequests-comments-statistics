@@ -29,28 +29,35 @@ public class Report {
             header.add("pullRequestLink");
             header.add("daysCountWithoutAnyActivity");
 
-            header.add("reason");
-            header.add("count");
             header.add("commitsCount");
+            header.add("commentsCount");
+            header.add("chainsCount");
+            header.add("totalTagsCount");
+            for (Tag tag : Tag.values()) {
+                header.add(tag.name());
+            }
 
             writer.writeNext(header.toArray(new String[]{}));
 
             for (ReportItem reportItem : items) {
+                List<String> entry = new ArrayList<>();
+                entry.add(reportItem.getPullRequestId().toString());
+                entry.add(reportItem.getCreatedDate());
+                entry.add(reportItem.getMergedDate());
+                entry.add(reportItem.getPullRequestLink());
+                entry.add(String.valueOf(reportItem.getDaysCountWithoutAnyActivity()));
+
+                entry.add(String.valueOf(reportItem.getCommitCount()));
+                entry.add(String.valueOf(reportItem.getCommentsCount()));
+                entry.add(String.valueOf(reportItem.getChainsCount()));
+                entry.add(String.valueOf(reportItem.getTotalTagsCount()));
+
                 for (Tag tag : Tag.values()) {
                     Integer tagValue = reportItem.getPrStatistic().getOrDefault(tag, 0);
-                    if (tagValue > 0) {
-                        List<String> entry = new ArrayList<>();
-                        entry.add(reportItem.getPullRequestId().toString());
-                        entry.add(reportItem.getCreatedDate());
-                        entry.add(reportItem.getMergedDate());
-                        entry.add(reportItem.getPullRequestLink());
-                        entry.add(String.valueOf(reportItem.getDaysCountWithoutAnyActivity()));
-                        entry.add(tag.name());
-                        entry.add(tagValue.toString());
-                        entry.add(String.valueOf(reportItem.getCommitCount()));
-                        writer.writeNext(entry.toArray(new String[]{}));
-                    }
+                    entry.add(String.valueOf(tagValue));
                 }
+
+                writer.writeNext(entry.toArray(new String[]{}));
             }
         } catch (IOException e) {
             e.printStackTrace();

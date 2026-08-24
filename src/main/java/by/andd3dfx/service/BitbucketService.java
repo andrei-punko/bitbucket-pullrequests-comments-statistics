@@ -150,6 +150,7 @@ public class BitbucketService {
                         .collect(Collectors.toSet());
 
                 Map<Long, List<Comment>> chains = buildChains(comments);
+                int chainsCount = (int) comments.stream().filter(comment -> comment.parent() == null).count();
                 Map<Tag, Integer> prStatistic = calculatePRStatistic(chains);
                 String mergeDate = pullRequest.updated_on();
                 int daysCountWithoutAnyActivity = calculateDaysCountWithoutAnyActivity(comments, activityDates);
@@ -160,7 +161,9 @@ public class BitbucketService {
                         pullRequest.links().html().href(),
                         prStatistic,
                         daysCountWithoutAnyActivity,
-                        commitHashes.size()));
+                        commitHashes.size(),
+                        comments.size(),
+                        chainsCount));
                 log(progress + " PR " + id + ": comments=" + comments.size() + ", commits=" + commitHashes.size());
             } catch (Exception e) {
                 log(progress + " Failed on PR " + id + ": " + e.getMessage());
